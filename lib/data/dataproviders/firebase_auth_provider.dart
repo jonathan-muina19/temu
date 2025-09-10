@@ -1,5 +1,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+// C;est ici qu'on va faire notre code brute
+// pas de logique d'auth
 
 class MyAuthProvider {
   // On instancie FIREBASE

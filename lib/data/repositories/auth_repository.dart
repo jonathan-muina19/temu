@@ -38,5 +38,4 @@ class AuthRepository {
   // Obtenur l'utilosateur actuel
   User? get currentUser => _authProvider.currentUser;
 
-
 }
