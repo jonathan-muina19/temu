@@ -7,13 +7,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:temu/data/dataproviders/firebase_auth_provider.dart';
+import 'package:temu/data/repositories/auth_repository.dart';
 
 import 'package:temu/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    final authRepository = AuthRepository(MyAuthProvider());
+    await tester.pumpWidget(MyApp(authRepository: authRepository));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
