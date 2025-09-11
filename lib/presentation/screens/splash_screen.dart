@@ -6,6 +6,9 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 5), (){
+      Navigator.pushReplacementNamed(context, '/homescreen');
+    });
     return Scaffold(
       backgroundColor: Color(0XFF129575),
       body: Center(
@@ -20,6 +23,10 @@ class SplashScreen extends StatelessWidget {
               fontSize: 30,
               color: Colors.white
               ),
+            ),
+            const SizedBox(height: 50),
+            CircularProgressIndicator(
+              color: Colors.white,
             )
           ],
         ),

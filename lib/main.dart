@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temu/cubit/auth/auth_cubit.dart';
 import 'package:temu/data/repositories/auth_repository.dart';
 import 'package:temu/firebase_options.dart';
+import 'package:temu/presentation/router/app_router.dart';
 import 'package:temu/presentation/screens/splash_screen.dart';
 import 'data/dataproviders/firebase_auth_provider.dart';
 
@@ -26,7 +27,9 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   final AuthRepository authRepository;
 
-  const MyApp({super.key, required this.authRepository});
+  MyApp({super.key, required this.authRepository});
+
+  final AppRouter _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthCubit(authRepository)..checkAuthStatus(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen()
+        onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );
   }
