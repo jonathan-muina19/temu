@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,16 +8,14 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 5), (){
-      Navigator.pushReplacementNamed(context, '/homescreen');
-    });
+
     return Scaffold(
-      backgroundColor: Color(0XFF129575),
+      backgroundColor: Colors.deepOrange,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/image 11.png'),
+            Image.asset('assets/images/airbnb.png', height: 110),
             const SizedBox(height: 10),
             Text('T E M U', style: TextStyle(
               fontFamily: 'Poppins',
