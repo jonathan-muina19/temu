@@ -21,29 +21,13 @@ dependencies:
   bloc_test: ^10.0.0
   mocktail: ^1.0.4
 
-  flutter_native_splash: ^2.4.6
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.4
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/logo1.png"
-
-
-flutter_native_splash:
-  color: "#129575"
-  image: assets/images/icon.png
-  android: true
-  ios: true
-  web: false
-  android_12:
-    color: "#129575"
-    image: assets/images/icon.png
 
 
 flutter:
@@ -53,6 +37,6 @@ flutter:
     - assets/images/
 
   fonts:
-    - family: Poppins
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf

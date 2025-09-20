@@ -8,28 +8,27 @@ import 'package:temu/presentation/screens/splash_screen.dart';
 import '../screens/home_screen.dart';
 
 class AppRouter {
-
   Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
-    switch(routeSettings.name){
-      case '/' :
+    switch (routeSettings.name) {
+      case '/':
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case '/homescreen':
         return MaterialPageRoute(builder: (_) => HomeScreen());
-      case '/onboarding' :
+      case '/onboarding':
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
-      case '/login' :
+      case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
-      case '/register' :
+      case '/register':
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-              body: Center(
-                child: Text('Page non trouvee : ${routeSettings.name}'),
+          builder:
+              (_) => Scaffold(
+                body: Center(
+                  child: Text('Page non trouvee : ${routeSettings.name}'),
+                ),
               ),
-            )
         );
-
     }
   }
 }

@@ -11,11 +11,10 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Home Page', style: TextStyle(
-              fontSize: 20,
-              color: Colors.black
-              ),
-            )
+            Text(
+              'Home Page',
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
           ],
         ),
       ),
