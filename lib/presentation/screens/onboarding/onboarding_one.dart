@@ -31,7 +31,7 @@ class OnboardingOne extends StatelessWidget {
                           Colors.white.withOpacity(0.9), // haut (blanc visible)
                           Colors.white.withOpacity(0.0), // vers transparent
                         ],
-                        stops: [0.0, 0.6], // contrôle la zone du dégradé
+                        stops: [0.1, 0.3], // contrôle la zone du dégradé
                       ),
                     ),
                   ),
@@ -53,7 +53,11 @@ class OnboardingOne extends StatelessWidget {
           Text(
             'Des repas faciles, savoureux et sains\n à portée de main',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+            style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey.shade700,
+                fontWeight: FontWeight.w400
+            ),
           ),
           const SizedBox(height: 30),
         ],

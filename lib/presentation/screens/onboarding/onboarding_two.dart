@@ -21,7 +21,7 @@ class _OnboardingTwoState extends State<OnboardingTwo> {
                 // Image
                 Positioned.fill(
                   child: Image.asset(
-                    'assets/images/chef2.jpg',
+                    'assets/images/juice.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -36,7 +36,7 @@ class _OnboardingTwoState extends State<OnboardingTwo> {
                           Colors.white.withOpacity(0.9), // haut (blanc visible)
                           Colors.white.withOpacity(0.0), // vers transparent
                         ],
-                        stops: [0.0, 0.6], // contrôle la zone du dégradé
+                        stops: [0.1, 0.3], // contrôle la zone du dégradé
                       ),
                     ),
                   ),
@@ -59,7 +59,11 @@ class _OnboardingTwoState extends State<OnboardingTwo> {
           Text(
             "Des recettes traditionnelles aux saveurs modernes. ",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey.shade700,
+              fontWeight: FontWeight.w400
+            ),
           ),
           const SizedBox(height: 30),
         ],

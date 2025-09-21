@@ -4,7 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:temu/presentation/screens/onboarding/onboarding_free.dart';
 import 'package:temu/presentation/screens/onboarding/onboarding_one.dart';
 import 'package:temu/presentation/screens/onboarding/onboarding_two.dart';
-import 'package:temu/presentation/widgets/button_onboarding/button_onboarding.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -52,6 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                     child: Text('Skip', style: TextStyle(
                       color: Colors.black,
+                      fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold
                       ),
                       textAlign: TextAlign.center,
@@ -60,19 +60,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SmoothPageIndicator(
                       controller: _controller, count: 3,
                     effect: WormEffect(
-                      dotHeight: 12,
-                      dotWidth: 12,
+                      dotHeight: 10,
+                      dotWidth: 10,
                       type: WormType.normal,
                       spacing: 8,
-                      dotColor: Colors.grey,
+                      dotColor: Colors.grey.shade400,
                       activeDotColor: Colors.deepOrangeAccent
                     ),
                   ),
                   onLastPage ?
-
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushReplacementNamed(context, '/homescreen');
+                      Navigator.pushReplacementNamed(context, '/register');
                     },
                     child: Container(
                       padding: EdgeInsets.all(15),

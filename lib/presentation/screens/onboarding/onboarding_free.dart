@@ -16,7 +16,7 @@ class OnboardingFree extends StatelessWidget {
                 // Image
                 Positioned.fill(
                   child: Image.asset(
-                    'assets/images/madeblo.png',
+                    'assets/images/jus.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -31,7 +31,7 @@ class OnboardingFree extends StatelessWidget {
                           Colors.white.withOpacity(0.9), // haut (blanc visible)
                           Colors.white.withOpacity(0.0), // vers transparent
                         ],
-                        stops: [0.0, 0.6], // contrôle la zone du dégradé
+                        stops: [0.1, 0.3], // contrôle la zone du dégradé
                       ),
                     ),
                   ),
@@ -41,20 +41,30 @@ class OnboardingFree extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Center(
-            child: Text(
-              textAlign: TextAlign.center,
-              'Cuisinez plus malin, mangez mieux',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Montserrat',
-                fontSize: 23,
+            child: Padding(
+              padding: const EdgeInsets.all(7.0),
+              child: Text(
+                textAlign: TextAlign.center,
+                'Cuisinez plus malin, mangez mieux',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Montserrat',
+                  fontSize: 23,
+                ),
               ),
             ),
           ),
-          Text(
-            'Cuisinez les classiques congolais et bien plus encore',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(
+              'Apprenez a faire de jus naturel a un temps record et buvez a votre soif',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey.shade700,
+                  fontWeight: FontWeight.w400
+              ),
+            ),
           ),
           const SizedBox(height: 30),
         ],
