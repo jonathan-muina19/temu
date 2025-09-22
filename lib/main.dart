@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temu/cubit/auth/auth_cubit.dart';
+import 'package:temu/cubit/splash/splash_cubit.dart';
 import 'package:temu/data/repositories/auth_repository.dart';
 import 'package:temu/firebase_options.dart';
 import 'package:temu/presentation/router/app_router.dart';
@@ -31,10 +32,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthCubit>(
-      create: (context) => AuthCubit(authRepository)..checkAuthStatus(),
+    return MultiBlocProvider(
+      providers: [
+        //Cubit du SplashScreen pour gerer le onboarding vs Login
+        BlocProvider(create: (_) => SplashCubit()..checkFirstLaunch()),
+        BlocProvider(
+          create: (_) => AuthCubit(authRepository)..checkAuthStatus(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
         onGenerateRoute: _appRouter.onGenerateRoute,
       ),
     );

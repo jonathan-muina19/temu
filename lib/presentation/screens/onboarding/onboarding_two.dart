@@ -62,7 +62,7 @@ class _OnboardingTwoState extends State<OnboardingTwo> {
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey.shade700,
-              fontWeight: FontWeight.w400
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 30),

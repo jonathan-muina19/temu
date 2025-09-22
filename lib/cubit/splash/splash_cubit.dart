@@ -2,12 +2,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:temu/cubit/splash/splash_state.dart';
 
-class SplashCubit extends Cubit<SplashState>{
-  SplashCubit() : super(SplashState(status: SplashStatus.initial));// On demare le spash
+class SplashCubit extends Cubit<SplashState> {
+  SplashCubit()
+    : super(SplashState(status: SplashStatus.initial)); // On demare le spash
 
   // Cette methode est asynchrone car on va attendre le timer
   // Elle sera appelee depuis le initial() du splashscreen
-  Future<void> checkFirstLaunch() async{
+  Future<void> checkFirstLaunch() async {
     await Future.delayed(const Duration(seconds: 4)); // Timer du splash
 
     // On cree une instance de SharedPreferences
@@ -15,9 +16,9 @@ class SplashCubit extends Cubit<SplashState>{
 
     final onboardingDone = prefs.getBool('onboarding_done') ?? false;
 
-    if(onboardingDone){
+    if (onboardingDone) {
       emit(SplashState(status: SplashStatus.notFirstLauch));
-    }else{
+    } else {
       emit(SplashState(status: SplashStatus.firstLauch));
     }
   }

@@ -54,9 +54,9 @@ class OnboardingOne extends StatelessWidget {
             'Des repas faciles, savoureux et sains\n à portée de main',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey.shade700,
-                fontWeight: FontWeight.w400
+              fontSize: 16,
+              color: Colors.grey.shade700,
+              fontWeight: FontWeight.w400,
             ),
           ),
           const SizedBox(height: 30),
