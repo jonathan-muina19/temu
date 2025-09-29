@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class RegisterButton extends StatelessWidget {
   final String title;
-  final String imagePath;
+  final String? imagePath;
   final Color color;
   final Color? textColor;
   final Border? border;
@@ -14,7 +14,7 @@ class RegisterButton extends StatelessWidget {
     required this.title,
     required this.color,
     this.border,
-    required this.imagePath,
+    this.imagePath,
     this.textColor,
     this.onTap,
   });

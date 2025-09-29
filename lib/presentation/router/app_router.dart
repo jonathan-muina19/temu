@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:temu/presentation/screens/email_verify_screen.dart';
 import 'package:temu/presentation/screens/register_screen.dart';
 import 'package:temu/presentation/screens/onboarding/onboarding_two.dart';
 import 'package:temu/presentation/screens/onboarding_screen.dart';
@@ -20,6 +21,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
+      case '/email-verify':
+        return MaterialPageRoute(builder: (_) => EmailVerifyScreen());
       case '/register':
         return MaterialPageRoute(builder: (_) => RegisterScreen());
       case '/onboardingtwo':

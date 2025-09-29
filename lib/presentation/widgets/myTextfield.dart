@@ -4,12 +4,16 @@ class MyTextfield extends StatelessWidget {
   final String hintText;
   final controller;
   final bool obscureTextField;
+  final FormFieldValidator<String>? validator;
+  final Icon? prefixcon;
 
   MyTextfield({
     super.key,
     required this.hintText,
     required this.controller,
     this.obscureTextField = false,
+    this.validator,
+    this.prefixcon,
   });
 
   // ignore: unused_field
@@ -20,10 +24,13 @@ class MyTextfield extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4),
       child: TextFormField(
+        validator: validator,
         obscureText: obscureTextField,
         cursorColor: Colors.black,
         controller: controller,
         decoration: InputDecoration(
+          prefixIcon: prefixcon,
+          prefixIconColor: Colors.grey,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade500),
             borderRadius: BorderRadius.circular(13),
@@ -42,9 +49,7 @@ class MyTextfield extends StatelessWidget {
           ),
           labelStyle: TextStyle(color: Colors.grey.shade700),
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontWeight: FontWeight.w400
-          ),
+          hintStyle: TextStyle(fontWeight: FontWeight.w400),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
           ),

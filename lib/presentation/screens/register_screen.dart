@@ -3,22 +3,36 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:temu/presentation/widgets/register_button.dart';
 
-import '../widgets/bottomsheetForm.dart';
+import '../widgets/bottomsheetFormSignup.dart';
+import '../widgets/bottomsheetFormSingin.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    void _showBottomSheet(BuildContext context) {
+    void _showBottomSheetSignup(BuildContext context) {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         builder: (BuildContext contect) {
-          return Bottomsheetform();
+          return BottomsheetformSingup();
+        },
+      );
+    }
+
+    void _showBottomSheetSignin(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder: (BuildContext contect) {
+          return BottomsheetformSignin();
         },
       );
     }
@@ -64,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'Ou se connecter Avec',
+                    "Ou s'inscrire avec",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -84,7 +98,7 @@ class RegisterScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             RegisterButton(
-              onTap: () => _showBottomSheet(context),
+              onTap: () => _showBottomSheetSignup(context),
               title: 'Inscription avec Email',
               color: Colors.black,
               imagePath: 'assets/icons/envelope.png',
@@ -105,10 +119,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                     recognizer:
                         TapGestureRecognizer()
-                          ..onTap = () {
-                            //Action au clic (Naviguer) vers la page login
-                            Navigator.pushReplacementNamed(context, '/login');
-                          },
+                          ..onTap = () => _showBottomSheetSignin(context),
                   ),
                 ],
               ),
@@ -182,4 +193,3 @@ Widget _subTitleRegister(BuildContext context) {
     ),
   );
 }
-
