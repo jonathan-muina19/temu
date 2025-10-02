@@ -19,16 +19,14 @@ Future<void> main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepository)),
+
         /// ✅ Ajout du SplashCubit ici
-        BlocProvider<SplashCubit>(
-          create: (context) => SplashCubit(),
-        ),
+        BlocProvider<SplashCubit>(create: (context) => SplashCubit()),
       ],
       child: MyApp(authRepository: authRepository),
     ),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   final AuthRepository authRepository;
@@ -40,9 +38,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
-        onGenerateRoute: _appRouter.onGenerateRoute,
-      );
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+      onGenerateRoute: _appRouter.onGenerateRoute,
+    );
   }
 }

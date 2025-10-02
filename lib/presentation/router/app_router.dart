@@ -8,7 +8,7 @@ import 'package:temu/presentation/screens/register_screen.dart';
 import 'package:temu/presentation/screens/splash_screen.dart';
 
 import '../screens/home_screen.dart';
-import '../screens/login_screen.dart';
+
 
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
@@ -19,8 +19,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/onboarding':
         return MaterialPageRoute(builder: (_) => OnboardingScreen());
-      case '/login':
-        return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/email-verify':
         return MaterialPageRoute(builder: (_) => EmailVerifyScreen());
       case '/register':

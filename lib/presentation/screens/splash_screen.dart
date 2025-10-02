@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
         BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             if (state is AuthSuccess) {
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/homescreen');
             } else if (state is AuthEmailNotVerified) {
               Navigator.pushReplacementNamed(context, '/email-verify');
             } else if (state is AuthFailure) {

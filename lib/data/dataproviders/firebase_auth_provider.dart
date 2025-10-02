@@ -11,7 +11,6 @@ class MyAuthProvider implements AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-
   // Register (Creer un compte)
   Future<User?> signUp(String email, String password, String username) async {
     try {

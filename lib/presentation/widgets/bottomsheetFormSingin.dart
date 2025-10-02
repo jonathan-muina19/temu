@@ -39,6 +39,13 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
   }
 
   @override
+  void dispose() {
+    controllerPassword.dispose();
+    controllerEmail.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
@@ -90,7 +97,11 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
                   elevation: 20,
                 ),
               );
-              Navigator.pushReplacementNamed(context, '/homescreen');
+              Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/homescreen',
+                  (route) => false
+              );
             }
           },
           builder: (context, state) {
@@ -138,20 +149,31 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
                       controller: controllerPassword,
                       validator: passwordValidator,
                     ),
-                    const SizedBox(height: 20),
-                    state is AuthLoading ? const Center(child: CircularProgressIndicator()) :
+                    const SizedBox(height: 5),
                     Center(
                       child: GestureDetector(
-                        onTap: _login,
+                        onTap: state is AuthLoading ? null : _login,
                         child: Container(
                           height: 48,
                           width: 326,
                           decoration: BoxDecoration(
-                            color: Colors.orange,
+                            color:
+                            state is AuthLoading
+                                ? Colors.orange.shade300
+                                : Colors.orange,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: Row(
+                            child: state is AuthLoading ?
+                            SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            ) :
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Icon(Icons.login, color: Colors.white),

@@ -17,7 +17,7 @@ class EmailVerifyScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/message.gif', height: 150),
-              const SizedBox(height: 10,),
+              const SizedBox(height: 10),
               Text(
                 'Votre adresse e-mail n\'est pas encore vérifiée.',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -26,17 +26,15 @@ class EmailVerifyScreen extends StatelessWidget {
               Text(
                 'Veuillez consulter votre boîte mail \n(y compris le dossier spam).',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15
-                ),
+                style: TextStyle(fontSize: 15),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 20),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/register',
-                      (route) => false
+                    context,
+                    '/register',
+                    (route) => false,
                   );
                 },
                 child: Container(
@@ -52,18 +50,19 @@ class EmailVerifyScreen extends StatelessWidget {
                       children: [
                         Icon(Icons.login_sharp, color: Colors.white),
                         const SizedBox(width: 20),
-                        Text('Se connecter', style:TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        )
-                        )
+                        Text(
+                          'Se connecter',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
                     ),
-
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

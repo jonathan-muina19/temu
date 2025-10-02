@@ -16,7 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         // Connexion avec le repository
         await authRepository.signIn(event.email, event.password);
         final user = FirebaseAuth.instance.currentUser;
-        // Vérifier si l'utilisateur est déjà inscrit
+        // Vérifier si l'utilisateur est déjà inscrit et si son email verifier
         if (user != null && !user.emailVerified) {
           emit(AuthFailure('email-not-verified'));
           return;
@@ -52,8 +52,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading());
       try {
         // Inscription avec le repository
+        await authRepository.signUp(
+          event.email,
+          event.password,
+          event.username,
+        );
         // Envoyer l'email de vérification
-        await authRepository.signUp(event.email, event.password, event.username);
         await authRepository.sendEmailVerification();
         emit(EmailVerificationSent());
       } on FirebaseAuthException catch (e) {
@@ -111,7 +115,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-
     //
     on<CheckEmailVerified>((event, emit) async {
       // Emettre l'état de chargement
@@ -120,7 +123,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         // Vérifier si l'email est vérifié
         final user = FirebaseAuth.instance.currentUser;
-        await user?.reload();// Recharger l'utilisateur
+        await user?.reload(); // Recharger l'utilisateur
         // Si oui, emiter l'état d'email vérifié
         final refreshedUser = FirebaseAuth.instance.currentUser;
         if (refreshedUser != null && refreshedUser.emailVerified) {
@@ -146,4 +149,4 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
   }
-  }
+}

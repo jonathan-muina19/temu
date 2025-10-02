@@ -9,13 +9,12 @@ class SplashState extends Equatable {
   const SplashState({required this.status});
 
   // État initial
-  factory SplashState.initial() => const SplashState(status: SplashStatus.initial);
+  factory SplashState.initial() =>
+      const SplashState(status: SplashStatus.initial);
 
   // Permet de copier l'état facilement
   SplashState copyWith({SplashStatus? status}) {
-    return SplashState(
-      status: status ?? this.status,
-    );
+    return SplashState(status: status ?? this.status);
   }
 
   @override

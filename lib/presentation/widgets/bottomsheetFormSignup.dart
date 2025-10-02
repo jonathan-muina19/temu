@@ -34,12 +34,11 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
     if (value == null || value.isEmpty) {
       return 'Veuillez entrez votre adresse Enail';
     }
-    if(!value.contains("@gmail.com")){
+    if (!value.contains("@gmail.com")) {
       return "Votre adresse email est invalide";
     }
     return null;
   }
-
 
   /// validator pour le mot de passe
   String? passwordValidator(String? value) {
@@ -73,41 +72,71 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
   }
 
   @override
+  void dispose() {
+    controllerUserName.dispose();
+    controllerEmail.dispose();
+    controllerPassword.dispose();
+    controllerConfirmPassword.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-        child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state){
-          if(state is EmailVerificationSent){
+      child: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is EmailVerificationSent) {
             //Navigator.pushReplacementNamed(context, '/homescreen');
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                  backgroundColor: Colors.transparent,
-                  content: MyScaffoldMessenger(
+                backgroundColor: Colors.transparent,
+                content: MyScaffoldMessenger(
                   title: "Confirmation",
                   message: "Email de confirmation envoyer\nVerifier vos mails",
                   color: Colors.blue,
-                  icon: Icon(Icons.info_rounded)
-              )
-              )
+                  icon: Icon(Icons.info_rounded),
+                ),
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 630,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 20,
+              ),
             );
           }
-          if(state is AuthFailure){
+          if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                  backgroundColor: Colors.transparent,
-                  content: MyScaffoldMessenger(
-                      title: "Erreur",
-                      message: state.message,
-                      color: Colors.red,
-                      icon: Icon(Icons.error)
-                  )
-              )
+                backgroundColor: Colors.transparent,
+                content: MyScaffoldMessenger(
+                  title: "Erreur",
+                  message: state.message,
+                  color: Colors.red,
+                  icon: Icon(Icons.error),
+                ),
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: 630,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 20,
+              ),
             );
           }
-
         },
-        builder: (context, state){
+        builder: (context, state) {
           return Padding(
             padding: EdgeInsets.only(
               left: 5,
@@ -116,7 +145,9 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
             ),
             child: Container(
               width: 430,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Wrap(
@@ -126,14 +157,14 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const SizedBox(height: 5,),
+                          const SizedBox(height: 5),
                           Center(
                             child: Container(
                               width: 50,
                               height: 5,
                               decoration: BoxDecoration(
-                                  color: Colors.grey[500],
-                                  borderRadius: BorderRadius.circular(10)
+                                color: Colors.grey[500],
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
@@ -150,42 +181,42 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
                             ),
                           ),
                           Text(
-                              textAlign: TextAlign.start,
-                              'Inscrivez-vous',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Montserrat',
-                                fontSize: 23,
-                              )
-                          )
+                            textAlign: TextAlign.start,
+                            'Inscrivez-vous',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Montserrat',
+                              fontSize: 23,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     MyTextfield(
-                        prefixcon: Icon(Icons.person),
-                        validator: nameValidator,
-                        hintText: "Nom d'utilisateur",
-                        controller: controllerUserName
+                      prefixcon: Icon(Icons.person),
+                      validator: nameValidator,
+                      hintText: "Nom d'utilisateur",
+                      controller: controllerUserName,
                     ),
                     MyTextfield(
-                        validator: emailValidator,
-                        prefixcon: Icon(Icons.email_rounded),
-                        hintText: "Adresse email",
-                        controller: controllerEmail
+                      validator: emailValidator,
+                      prefixcon: Icon(Icons.email_rounded),
+                      hintText: "Adresse email",
+                      controller: controllerEmail,
                     ),
                     MyTextfield(
-                        validator: passwordValidator,
-                        prefixcon: Icon(Icons.lock),
-                        obscureTextField: true,
-                        hintText: "Mot de passe",
-                        controller: controllerPassword
+                      validator: passwordValidator,
+                      prefixcon: Icon(Icons.lock),
+                      obscureTextField: true,
+                      hintText: "Mot de passe",
+                      controller: controllerPassword,
                     ),
                     MyTextfield(
-                        validator: confirmPasswordValidator,
-                        prefixcon: Icon(Icons.lock),
-                        obscureTextField: true,
-                        hintText: "Confirmer Mot de passe",
-                        controller: controllerConfirmPassword
+                      validator: confirmPasswordValidator,
+                      prefixcon: Icon(Icons.lock),
+                      obscureTextField: true,
+                      hintText: "Confirmer Mot de passe",
+                      controller: controllerConfirmPassword,
                     ),
                     Center(
                       child: GestureDetector(
@@ -194,35 +225,43 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
                           height: 48,
                           width: 326,
                           decoration: BoxDecoration(
-                            color: state is AuthLoading ? Colors.orange.shade300 : Colors.orange,
+                            color:
+                                state is AuthLoading
+                                    ? Colors.orange.shade300
+                                    : Colors.orange,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: state is AuthLoading
-                                ? SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
-                                : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add_circle_outline_outlined, color: Colors.white),
-                                const SizedBox(width: 5),
-                                Text(
-                                  'Inscription',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child:
+                                state is AuthLoading
+                                    ? SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                    : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.add_circle_outline_outlined,
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Text(
+                                          'Inscription',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                           ),
                         ),
                       ),
@@ -236,11 +275,9 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
             ),
           );
         },
-
       ),
     );
   }
 }
 
- // recupere le state du authcubit
-
+// recupere le state du authcubit
