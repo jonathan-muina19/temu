@@ -15,7 +15,7 @@ import 'package:temu/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    final authRepository = AuthRepository(MyAuthProvider());
+    final authRepository = MyAuthProvider();
     await tester.pumpWidget(MyApp(authRepository: authRepository));
 
     // Verify that our counter starts at 0.

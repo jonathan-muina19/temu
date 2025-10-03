@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temu/bloc/auth/auth_bloc.dart';
 import 'package:temu/bloc/splash/splash_cubit.dart';
+import 'package:temu/bloc/users/user_bloc.dart';
 import 'package:temu/data/repositories/auth_repository.dart';
 import 'package:temu/firebase_options.dart';
 import 'package:temu/presentation/router/app_router.dart';
@@ -14,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final AuthRepository authRepository = MyAuthProvider();
+  final firestore =  FirebaseFirestore.instance;
 
   runApp(
     MultiBlocProvider(
@@ -22,6 +25,7 @@ Future<void> main() async {
 
         /// ✅ Ajout du SplashCubit ici
         BlocProvider<SplashCubit>(create: (context) => SplashCubit()),
+        BlocProvider<UserBloc>(create: (context) => UserBloc(firestore)),
       ],
       child: MyApp(authRepository: authRepository),
     ),

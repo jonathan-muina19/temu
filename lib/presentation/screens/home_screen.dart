@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       builder: (context, state) {
         if (state is AuthLoading) {
-          return const Scaffold(
+          return  Scaffold(
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,65 +57,73 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         }
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 60),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/7286142.png', height: 100),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Connecté en tant que :',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      '$username',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap:
-                          () =>
-                              context.read<AuthBloc>().add(SignOutRequested()),
-                      child: Container(
-                        width: 150,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.orangeAccent,
-                          borderRadius: BorderRadius.circular(10),
+        if(state is AuthSuccess){
+          final user = state.user;
+          return Scaffold(
+            body: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 60),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/7286142.png', height: 100),
+                      const SizedBox(height: 20),
+                      Text(
+                        'Connecté en tant que :',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.logout_rounded, color: Colors.white),
-                              const SizedBox(width: 5),
-                              Text(
-                                "Deconnexion",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                      ),
+                      Text(
+                        '${state.user.username}',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap:
+                            () =>
+                            context.read<AuthBloc>().add(SignOutRequested()),
+                        child: Container(
+                          width: 150,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.orangeAccent,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.logout_rounded, color: Colors.white),
+                                const SizedBox(width: 5),
+                                Text(
+                                  "Deconnexion",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
+          );
+        }
+        return Scaffold(
+          body: Center(
+            child: const CircularProgressIndicator(color: Colors.orangeAccent),
           ),
         );
       },

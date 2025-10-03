@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:temu/data/models/user_model.dart';
 
 //but : Definir ce qu'on veut faire, pas comment.
 abstract class AuthState extends Equatable {
@@ -13,7 +14,14 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 /// Evenement de type succès
-class AuthSuccess extends AuthState {}
+class AuthSuccess extends AuthState {
+  final UserModel user;
+
+  AuthSuccess(this.user);
+  @override
+  List<Object?> get props => [user];
+
+}
 
 /// Evenement de type email envoyé
 class EmailVerificationSent extends AuthState {}

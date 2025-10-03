@@ -9,7 +9,6 @@ import 'package:temu/presentation/screens/splash_screen.dart';
 
 import '../screens/home_screen.dart';
 
-
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {

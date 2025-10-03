@@ -59,7 +59,11 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
           listener: (context, state) {
             if (state is AuthFailure) {
               if (state.message == 'email-not-verified') {
-                Navigator.pushReplacementNamed(context, '/email-verify');
+                Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/email-verify',
+                    (route) => false
+                );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -80,6 +84,8 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
                 );
               }
             } else if (state is AuthSuccess) {
+              //Quand l'utilisateur est connecter , on charge les infos firestore
+
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: MyScaffoldMessenger(

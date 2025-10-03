@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:temu/bloc/auth/auth_event.dart';
 import 'package:temu/bloc/auth/auth_state.dart';
 import 'package:temu/data/repositories/auth_repository.dart';
+
+import '../../data/models/user_model.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
@@ -10,18 +13,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(this.authRepository) : super(AuthInitial()) {
     // Connexion
     on<SignInRequested>((event, emit) async {
-      // Emettre l'état de chargement
       emit(AuthLoading());
       try {
-        // Connexion avec le repository
+        // Connexion via repository
         await authRepository.signIn(event.email, event.password);
+
         final user = FirebaseAuth.instance.currentUser;
-        // Vérifier si l'utilisateur est déjà inscrit et si son email verifier
+
+        // Vérifier si l'utilisateur est connecté et email vérifié
         if (user != null && !user.emailVerified) {
           emit(AuthFailure('email-not-verified'));
           return;
+        }
+
+        if (user != null) {
+          // 🔥 Récupérer les infos Firestore
+          final snapshot = await FirebaseFirestore.instance
+              .collection("users")
+              .doc(user.uid)
+              .get();
+
+          if (snapshot.exists) {
+            final data = snapshot.data()!;
+            final userModel = UserModel.fromMap(data, user.uid);
+
+            // ✅ On envoie AuthSuccess avec toutes les infos
+            emit(AuthSuccess(userModel));
+          } else {
+            emit(AuthFailure("Aucune donnée utilisateur trouvée"));
+          }
         } else {
-          emit(AuthSuccess());
+          emit(AuthFailure("Utilisateur introuvable"));
         }
       } on FirebaseAuthException catch (e) {
         String message;
@@ -43,9 +65,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
         emit(AuthFailure(message));
       } catch (e) {
-        emit(AuthFailure('$e'));
+        emit(AuthFailure(e.toString()));
       }
     });
+
 
     // Inscription
     on<SignUpRequested>((event, emit) async {
@@ -91,21 +114,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Vérifier statut
     on<CheckAuthStatus>((event, emit) async {
-      // Emettre l'état de chargement
       await Future.delayed(const Duration(seconds: 2));
-      // Vérifier si l'utilisateur est connecté
-      // Si oui, vérifier si l'email est vérifié
-      // Sinon, emiter l'état d'email non vérifié
-      // Sinon, emiter l'état initial
+
       try {
         final isLoggedIn = await authRepository.isSignedIn.first;
 
         if (isLoggedIn) {
           final user = FirebaseAuth.instance.currentUser;
+
           if (user != null && !user.emailVerified) {
             emit(AuthEmailNotVerified());
-          } else {
-            emit(AuthSuccess());
+            return;
+          }
+
+          if (user != null) {
+            // Récupérer le document Firestore
+            final snapshot = await FirebaseFirestore.instance
+                .collection("users")
+                .doc(user.uid)
+                .get();
+
+            if (snapshot.exists) {
+              final data = snapshot.data()!;
+              final userModel = UserModel.fromMap(data, user.uid);
+
+              emit(AuthSuccess(userModel)); // ✅ tu passes UserModel
+            } else {
+              emit(AuthFailure("Utilisateur introuvable dans Firestore"));
+            }
           }
         } else {
           emit(AuthInitial());
