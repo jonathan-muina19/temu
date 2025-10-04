@@ -50,8 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
         // Écoute de l'AuthBloc
         BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
-            if (state is AuthSuccess) {
-              Navigator.pushReplacementNamed(context, '/homescreen');
+            if (state is AuthSuccess ) {
+              Navigator.pushReplacementNamed(context, '/mainwrapper');
             } else if (state is AuthEmailNotVerified) {
               Navigator.pushReplacementNamed(context, '/email-verify');
             } else if (state is AuthFailure) {

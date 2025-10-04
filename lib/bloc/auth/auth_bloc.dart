@@ -34,7 +34,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               .get();
 
           if (snapshot.exists) {
+            // 🔥 Récupérer les infos Firestore
+            // 🔥 Les infos Firestore sont stockées dans un Map
+            // 🔥 On peut les convertir en UserModel
             final data = snapshot.data()!;
+            // 🔥 Convertir les infos Firestore en UserModel
             final userModel = UserModel.fromMap(data, user.uid);
 
             // ✅ On envoie AuthSuccess avec toutes les infos

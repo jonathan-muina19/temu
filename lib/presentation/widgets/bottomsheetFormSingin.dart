@@ -84,8 +84,6 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
                 );
               }
             } else if (state is AuthSuccess) {
-              //Quand l'utilisateur est connecter , on charge les infos firestore
-
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: MyScaffoldMessenger(
@@ -95,7 +93,7 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
                     icon: Icon(Icons.check_circle_rounded),
                   ),
                   behavior: SnackBarBehavior.floating,
-                  margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 630),
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 580),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)
                   ),
@@ -105,7 +103,7 @@ class _BottomsheetformState extends State<BottomsheetformSignin> {
               );
               Navigator.pushNamedAndRemoveUntil(
                   context,
-                  '/homescreen',
+                  '/mainwrapper',
                   (route) => false
               );
             }

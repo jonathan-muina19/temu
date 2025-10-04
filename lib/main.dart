@@ -10,6 +10,7 @@ import 'package:temu/firebase_options.dart';
 import 'package:temu/presentation/router/app_router.dart';
 import 'package:temu/presentation/screens/splash_screen.dart';
 import 'bloc/auth/auth_event.dart';
+import 'bloc/navigation/navigation_cubit.dart';
 import 'data/dataproviders/firebase_auth_provider.dart';
 
 Future<void> main() async {
@@ -25,7 +26,10 @@ Future<void> main() async {
 
         /// ✅ Ajout du SplashCubit ici
         BlocProvider<SplashCubit>(create: (context) => SplashCubit()),
+        /// ✅ Ajout du UserBloc ici
         BlocProvider<UserBloc>(create: (context) => UserBloc(firestore)),
+        /// ✅ Ajout du NavigationCubit ici
+        BlocProvider<NavigationCubit>(create: (context) => NavigationCubit())
       ],
       child: MyApp(authRepository: authRepository),
     ),

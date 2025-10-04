@@ -18,7 +18,7 @@ class MyScaffoldMessenger extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        height: 70,
+        height: 78,
         padding: EdgeInsets.all(5),
         decoration: BoxDecoration(
           color: color,

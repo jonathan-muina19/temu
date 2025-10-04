@@ -3,9 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:temu/presentation/widgets/register_button.dart';
 
 import '../widgets/MyscaffoldMessenger.dart';
+import '../widgets/bottomsheetFormSingin.dart';
 
 class EmailVerifyScreen extends StatelessWidget {
   const EmailVerifyScreen({super.key});
+
+  void _showBottomSheetSignin(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext contect) {
+        return BottomsheetformSignin();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +44,7 @@ class EmailVerifyScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               GestureDetector(
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/register',
-                    (route) => false,
-                  );
-                },
+                onTap: () => _showBottomSheetSignin(context),
                 child: Container(
                   width: 200,
                   height: 50,

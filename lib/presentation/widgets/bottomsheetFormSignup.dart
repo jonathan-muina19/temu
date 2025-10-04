@@ -87,7 +87,11 @@ class _BottomsheetformState extends State<BottomsheetformSingup> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is EmailVerificationSent) {
-            //Navigator.pushReplacementNamed(context, '/homescreen');
+            Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/email-verify',
+                (route) => false
+            );
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 backgroundColor: Colors.transparent,
